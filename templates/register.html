@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="{{ url_for('register') }}" method="post">
+        <div>
+            <label for="fname"> Enter your first name:</label>
+            <input type="text" id="fname" name="fname">
+            <br><br>
+            <label for="lname"> Enter your last name:</label>
+            <input type="text" id="lname" name="lname">
+            <br><br>
+            <label for="username"> Enter a username:</label>
+            <input type="text" id="username" name="username">
+            <br><br>
+            <label for="password"> Enter a password:</label>
+            <input type="password" id="password" name="password">
+            <br><br>
+            <button type="submit" value="submit"> submit </button>
+        </div>
+    </form>
+
+{{error}}
+</body>
+</html>
