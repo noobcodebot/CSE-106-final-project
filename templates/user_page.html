@@ -3,13 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
+<body class="blue-background">
 <form action="{{ url_for('logout') }}" method="post">
-    <button type="submit">logout</button>
+    <button type="submit" class="logout-button">logout</button>
 </form>
-<h1>
-    Hi {{name}}
+<h1 class="center" style="color: white">
+    Hi, {{name}}
 </h1>
+<table id="tabs" align="center">
+    {%block content%}
+        {% if classes %}
+            <th>Course Name</th>
+            {% for i in range(classes|length) %}
+                <tr>
+                    <td>{{classes[i]}}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    {% endblock content%}
+</table>
 </body>
 </html>
