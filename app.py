@@ -64,10 +64,14 @@ def register():
         username = request.form['username']
         password = request.form['password']
         if username != ' ' and password != ' ' and fname != ' ' and lname != ' ':
-            add_user(username, password)
-            user = models.Users.query.filter_by(username=username).first()
-            add_student(fname, lname, user.id)
-            return redirect(url_for('login'))
+            if not models.Users.query.filter_by(username=username).first():
+                add_user(username, password)
+                user = models.Users.query.filter_by(username=username).first()
+                add_student(fname, lname, user.id)
+                return redirect(url_for('login'))
+            else:
+                return render_template('register.html',
+                                       error='Username already exists. Please try using a different username.')
         else:
             return render_template('register.html', error='Please enter valid credentials!')
     return render_template('register.html')
