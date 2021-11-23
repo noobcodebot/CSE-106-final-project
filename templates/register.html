@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
-<body>
+<body class="blue-background">
     <form action="{{ url_for('register') }}" method="post">
-        <div>
+        <div class="wrapper-register">
             <label for="fname"> Enter your first name:</label>
             <input type="text" id="fname" name="fname">
             <br><br>
@@ -19,7 +21,7 @@
             <label for="password"> Enter a password:</label>
             <input type="password" id="password" name="password">
             <br><br>
-            <button type="submit" value="submit"> submit </button>
+            <button type="submit" value="submit" class="login-buttons"> submit </button>
         </div>
     </form>
 
