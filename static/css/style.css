@@ -1,0 +1,48 @@
+.blue-background{
+    background-color:royalblue;
+}
+
+.login-buttons{
+    width: 100%;
+    background-color: gold;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    padding: 10px 20px;
+    border: 5px aliceblue;
+    border-radius: 5px;
+}
+
+.login-buttons:hover {
+    background-color: darkgoldenrod;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+div.wrapper {
+    width: 50%;
+    height:300px;
+    border:2.5px solid black;
+    border-radius: 2.5px;
+    color: white;
+    padding: 10px;
+    margin: auto;
+      position: relative;
+
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translate(0%, 0%);
+  transform: translate(-50%, -50%);
+}

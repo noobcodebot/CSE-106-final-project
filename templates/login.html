@@ -6,17 +6,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
-<body>
+<body class="blue-background">
 <form action="{{ url_for('login') }}" method="post">
-        <div>
-
-            <label for="username"> Username:</label>
+        <div class="wrapper">
+            <label for="username"> Username:</label><br>
             <input type="text" id="username" name="username">
             <br><br>
             <label for="password"> Password:</label>
+            <br>
             <input type="password" id="password" name="password">
             <br><br>
-            <button type="submit" value="submit"> login </button>
+            <div class="center">
+                <button type="submit" value="submit" class="login-buttons" > login </button>
+            </div>
         </div>
     </form>
 <h1 style="color: red">
