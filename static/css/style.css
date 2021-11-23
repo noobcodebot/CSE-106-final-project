@@ -53,11 +53,8 @@ div.wrapper-register {
 
 
 .center {
-  margin: 0;
-  position: absolute;
-  left: 50%;
-  -ms-transform: translate(0%, 0%);
-  transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: serif;
 }
 
 .link-button {
