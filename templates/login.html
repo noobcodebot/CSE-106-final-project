@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </head>
 <body class="blue-background">
-<form action="{{ url_for('login') }}" method="post">
-        <div class="wrapper">
-            <label for="username"> Username:</label><br>
-            <input type="text" id="username" name="username">
-            <br><br>
-            <label for="password"> Password:</label>
-            <br>
-            <input type="password" id="password" name="password">
-            <br><br>
-            <div class="center">
-                <button type="submit" value="submit" class="login-buttons" > login </button>
-            </div>
-        </div>
+<div class="wrapper">
+    <form action="{{ url_for('login') }}" method="post">
+        <label for="username"> Username:</label><br>
+        <input type="text" id="username" name="username">
+        <br><br>
+        <label for="password"> Password:</label>
+        <br>
+        <input type="password" id="password" name="password">
+        <br><br>
+        <button type="submit" value="submit" class="login-buttons" > login </button>
     </form>
-<h1 style="color: red">
+    <br><br>
+    <button type="button" onclick="jumpToLink('register')" class="link-button" name="reg_button">Create a new account</button>
+</div>
+        <h1 style="color: red">
     {{error}}
 </h1>
 </body>
