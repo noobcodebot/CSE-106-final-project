@@ -1,14 +1,11 @@
 from app import db
-from flask_login import LoginManager, UserMixin, current_user, login_user, login_required, logout_user
+from flask_login import UserMixin
 
 
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True)
     username = db.Column(db.String(25), nullable=False)
-    password = db.Column(db.String(25), nullable=False)
-
-    def check_password(self, password):
-        return self.password == password
+    password = db.Column(db.String(100), nullable=False)
 
 
 class Classes(db.Model):
