@@ -67,6 +67,7 @@ def register():
             add_user(username, password)
             user = models.Users.query.filter_by(username=username).first()
             add_student(fname, lname, user.id)
+            return redirect(url_for('login'))
         else:
             return render_template('register.html', error='Please enter valid credentials!')
     return render_template('register.html')
