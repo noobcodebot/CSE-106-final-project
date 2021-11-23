@@ -88,7 +88,7 @@ def login():
             return render_template('login.html', error='Please enter valid Username/Password')
         login_user(user)
         student = models.Students.query.filter_by(user_id=user.id).first()
-        return render_template('user_page.html', name=student.first_name)
+        return redirect(url_for('user_page', student_id=student.id))
     return render_template('login.html', error='')
 
 
@@ -97,6 +97,19 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+
+@app.route('/user/<student_id>', methods=['GET', 'POST'])
+@login_required
+def user_page(student_id):
+    name = models.Students.query.filter_by(id=student_id).first().first_name
+    classes = models.Enrollment.query.filter_by(student_id=student_id).all()
+    student_classes = []
+    for c in classes:
+        enrolled = models.Classes.query.filter_by(id=c.class_id).first()
+        student_classes.append(enrolled.class_name)
+    return render_template('user_page.html', name=name, classes=student_classes)
+
 
 
 if __name__ == "__main__":
