@@ -2,7 +2,7 @@ import os.path
 from flask import Flask, render_template, redirect, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
-import hashlib, uuid
+import hashlib
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
 import models
 
@@ -20,7 +20,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 app.secret_key = 'keep secret'  # placeholder
-salt = uuid.uuid4().hex.encode('utf-8')
+salt = '$aggrontyranitar$'.encode('utf-8')
 
 @login_manager.user_loader
 def load_user(user_id):
