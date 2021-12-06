@@ -1,19 +1,18 @@
 import os.path
-from flask import Flask, render_template, redirect, request, url_for
-from flask_sqlalchemy import SQLAlchemy
+from flask import render_template, redirect, request, url_for
 from sqlalchemy import create_engine
 import hashlib
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
-import models
+from models import Users, Classes, Students, Enrollment, app, db
 
-app = Flask(__name__)
+
 db_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'app.sqlite')
 db_uri = 'sqlite:///{}'.format(db_path)
 app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
-db = SQLAlchemy(app)
 engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"], echo=True)
 
 map_files = []
+
 
 db.create_all()
 db.session.commit()
@@ -24,9 +23,10 @@ login_manager.login_view = 'login'
 app.secret_key = 'keep secret'  # placeholder
 salt = '$aggrontyranitar$'.encode('utf-8')
 
+
 @login_manager.user_loader
 def load_user(user_id):
-    return models.Users.query.get(user_id)
+    return Users.query.get(user_id)
 
 
 def encrypt_password(password):
@@ -42,14 +42,20 @@ def check_password(plain, password):
 
 def add_user(username, password):
     new_password = encrypt_password(password)
-    user = models.Users(username=username, password=new_password)
+    user = Users(username=username, password=new_password)
     db.session.add(user)
     db.session.commit()
 
 
 def add_student(fname, lname, user_id):
-    student = models.Students(first_name=fname, last_name=lname, user_id=user_id)
+    student = Students(first_name=fname, last_name=lname, user_id=user_id)
     db.session.add(student)
+    db.session.commit()
+
+
+def add_class(student_id, class_id):
+    class_to_add = Classes.query.filter(Classes.id == class_id).first()
+    db.session.add(Enrollment(student_id=student_id, class_id=class_id))
     db.session.commit()
 
 
@@ -66,9 +72,9 @@ def register():
         username = request.form['username']
         password = request.form['password']
         if username != ' ' and password != ' ' and fname != ' ' and lname != ' ':
-            if not models.Users.query.filter_by(username=username).first():
+            if not Users.query.filter_by(username=username).first():
                 add_user(username, password)
-                user = models.Users.query.filter_by(username=username).first()
+                user = Users.query.filter_by(username=username).first()
                 add_student(fname, lname, user.id)
                 return redirect(url_for('login'))
             else:
@@ -82,14 +88,14 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        student = models.Students.query.filter_by(user_id=current_user.id).first()
+        student = Students.query.filter_by(user_id=current_user.id).first()
         return render_template('user_page.html', name=student.first_name)
     if request.method == 'POST':
-        user = models.Users.query.filter_by(username=request.form['username']).first()
+        user = Users.query.filter_by(username=request.form['username']).first()
         if user is None or not check_password(request.form['password'], user.password):
             return render_template('login.html', error='Please enter valid Username/Password')
         login_user(user)
-        student = models.Students.query.filter_by(user_id=user.id).first()
+        student = Students.query.filter_by(user_id=user.id).first()
         return redirect(url_for('user_page', student_id=student.id))
     return render_template('login.html', error='')
 
@@ -104,11 +110,11 @@ def logout():
 @app.route('/user/<student_id>', methods=['GET', 'POST'])
 @login_required
 def user_page(student_id):
-    name = models.Students.query.filter_by(id=student_id).first().first_name
-    classes = models.Enrollment.query.filter_by(student_id=student_id).all()
+    name = Students.query.filter_by(id=student_id).first().first_name
+    classes = Enrollment.query.filter_by(student_id=student_id).all()
     student_classes = []
     for c in classes:
-        enrolled = models.Classes.query.filter_by(id=c.class_id).first()
+        enrolled = Classes.query.filter_by(id=c.class_id).first()
         student_classes.append(enrolled.class_name)
     return render_template('user_page.html', name=name, classes=student_classes)
 
@@ -117,7 +123,7 @@ def user_page(student_id):
 @login_required
 def load_class():
     class_name = request.form['class']
-    class_to_load = models.Classes.query.filter_by(class_name=class_name).first()
+    class_to_load = Classes.query.filter_by(class_name=class_name).first()
     return render_template('classes.html', id=class_to_load.id)
 
 
