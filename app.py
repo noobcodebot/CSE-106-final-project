@@ -13,6 +13,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
 db = SQLAlchemy(app)
 engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"], echo=True)
 
+map_files = []
+
 db.create_all()
 db.session.commit()
 
@@ -110,6 +112,22 @@ def user_page(student_id):
         student_classes.append(enrolled.class_name)
     return render_template('user_page.html', name=name, classes=student_classes)
 
+
+@app.route('/classes/', methods=['GET', 'POST'])
+@login_required
+def load_class():
+    class_name = request.form['class']
+    class_to_load = models.Classes.query.filter_by(class_name=class_name).first()
+    return render_template('classes.html', id=class_to_load.id)
+
+
+@app.route('/class/1/map', methods=['GET', 'POST'])
+@login_required
+def class_map():
+    map_files.clear()
+    map_files.append("maps/COB1-1.svg")
+    map_files.append("maps/COB1-2.svg")
+    return render_template('class_map.html', src=map_files)
 
 
 if __name__ == "__main__":
