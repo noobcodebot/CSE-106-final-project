@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+</head>
+<body>
+    {% block content %}
+        {% if src %}
+            {% for i in range(src|length) %}
+                {% set link = src[i] %}
+                <embed src="{{url_for('static', filename=link)}}" width="100%" height="100%" />
+            {% endfor %}
+        {% endif %}
+    {% endblock content %}
+</body>
+</html>

@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </head>
-<body class="blue-background">
-<h1 class="center" style="color: white">
-    Welcome to our UC Merced class mapper!
-</h1>
+<body onload="loadClassMap({{id}})">
 </body>
 </html>
