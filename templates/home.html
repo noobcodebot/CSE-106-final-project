@@ -4,10 +4,22 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </head>
 <body class="blue-background">
+{% block content %}
+    {% if current_user.is_authenticated %}
+        <form action="{{ url_for('logout') }}" method="post">
+            <button type="submit" class="logout-button">logout</button>
+        </form>
+    {% else %}
+        <button type="button" class="logout-button" onclick="jumpToLink('login')">login</button>
+    {% endif %}
+{% endblock content %}
+
 <h1 class="center" style="color: white">
-    Welcome to our UC Merced class mapper!
+    Welcome to our UC Merced class maps!
 </h1>
+ <embed src="{{url_for('static', filename='maps/campus_map_recent.svg')}}" width="90%" height="90%">
 </body>
 </html>
