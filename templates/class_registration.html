@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add/Drop classes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+</head>
+<body class="blue-background">
+    <form action="{{url_for('logout')}}" method="post">
+        <button type="submit" class="logout-button">logout</button>
+    </form>
+    <div id="display">
+        <table id="tabs">
+            {% block content %}
+                {% if classes %}
+                    <th>Course ID</th>
+                    <th>Course Name</th>
+                    <th>Add</th>
+                    <th>Drop</th>
+                    {% for class in classes %}
+                        <tr>
+                            <td>{{class.id}}</td>
+                            <td>{{class.class_name}}</td>
+                            <td>
+                                <form action="{{url_for('add_class_to_user')}}" method = 'POST'>
+                                    <button type="submit" name="reg_button" value={{class.id}} class="reg-button">
+                                        Add
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% if error %}
+                        {{error}}
+                    {% endif %}
+                {% endif %}
+            {% endblock content %}
+        </table>
+
+    </div>
+</body>
+</html>
