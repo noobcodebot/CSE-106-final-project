@@ -12,7 +12,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
 engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"], echo=True)
 
 map_files = []
-
+classes= Classes.query.all()
 
 db.create_all()
 db.session.commit()
@@ -57,6 +57,15 @@ def add_class(student_id, class_id):
     class_to_add = Classes.query.filter(Classes.id == class_id).first()
     db.session.add(Enrollment(student_id=student_id, class_id=class_id))
     db.session.commit()
+
+
+def is_enrolled(class_id, student_id):
+    student = Students.query.filter_by(id=student_id).first()
+    classes = student.classes
+    for entry in classes:
+        if entry.id == class_id:
+            return True
+    return False
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -134,6 +143,24 @@ def class_map():
     map_files.append("maps/COB1-1.svg")
     map_files.append("maps/COB1-2.svg")
     return render_template('class_map.html', src=map_files)
+
+
+@app.route('/class/add_class', methods=['GET', 'POST'])
+@login_required
+def add_class_to_user():
+    user = Users.query.filter_by(id=current_user.id).first()
+    student = Students.query.filter(Students.user_id == user.id).first()
+
+    if request.method == 'POST':
+        class_id = int(request.form['reg_button'])
+        student = Students.query.filter(Students.user_id == current_user.id).first()
+        if not is_enrolled(class_id, student.id):
+            add_class(student.id, class_id)
+            return redirect(url_for('user_page'), student_id=student.id)
+        else:
+            return render_template('class_registration.html', classes=classes,
+                                   error='You are currently enrolled in this class!')
+    return render_template('class_registration.html', classes=classes)
 
 
 if __name__ == "__main__":
