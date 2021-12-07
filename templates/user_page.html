@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>User {{name}}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </head>
 <body class="blue-background">
+<button type="submit" class="link-button-right" onclick="jumpToLink('class/add_class')">add classes</button>
 <form action="{{ url_for('logout') }}" method="post">
     <button type="submit" class="logout-button">logout</button>
 </form>
+
 <h1 class="center" style="color: white">
     Hi, {{name}}
 </h1>
