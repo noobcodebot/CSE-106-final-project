@@ -11,8 +11,8 @@
         {% if src %}
             {% for i in range(src|length) %}
                 {% set link = src[i] %}
-                <embed src="{{url_for('static', filename=link)}}" width="100%" height="100%" />
-            {% endfor %}
+                <object id="svg-class" data="{{url_for('static', filename=link)}}" type="image/svg+xml" width="90%"></object>
+     {% endfor %}
         {% endif %}
     {% endblock content %}
 </body>
