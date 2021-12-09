@@ -1,0 +1,12 @@
+.series {
+    fill: #d2a715;
+    fill-opacity:1;
+    fill-rule:nonzero;
+    stroke:none;
+    cursor: pointer;
+}
+
+.series:hover{
+    fill: palegoldenrod;
+    opacity: 1;
+}
