@@ -163,5 +163,29 @@ def add_class_to_user():
     return render_template('class_registration.html', classes=classes)
 
 
+@app.route('/building/cob1/map', methods=['GET', 'POST'])
+def get_cob_map():
+    map_files.clear()
+    map_files.append("maps/COB1-1.svg")
+    map_files.append("maps/COB1-2.svg")
+    return render_template('class_map.html', src=map_files)
+
+
+@app.route('/building/cob2/map', methods=['GET', 'POST'])
+def get_cob2_map():
+    map_files.clear()
+    map_files.append("maps/COB2-1.svg")
+    map_files.append("maps/COB2-2.svg")
+    return render_template('class_map.html', src=map_files)
+
+
+@app.route('/building/admin/map', methods=['GET', 'POST'])
+def get_admin_map():
+    map_files.clear()
+    map_files.append("maps/admin-1.svg")
+    map_files.append("maps/admin-2.svg")
+    return render_template('class_map.html', src=map_files)
+
+
 if __name__ == "__main__":
     app.run()
