@@ -229,6 +229,20 @@ def get_ssm_map():
     return render_template('class_map.html', src=map_files)
 
 
+@app.route('/building/ssb/map', methods=['GET', 'POST'])
+def get_ssb_map():
+    map_files.clear()
+    map_files.append("maps/ssb.svg")
+    return render_template('class_map.html', src=map_files)
+
+
+@app.route('/building/sre/map', methods=['GET', 'POST'])
+def get_sre_map():
+    map_files.clear()
+    map_files.append("maps/sre.svg")
+    return render_template('class_map.html', src=map_files)
+
+
 @app.route('/building/kl/map', methods=['GET', 'POST'])
 def get_kl_map():
     map_files.clear()
