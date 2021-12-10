@@ -187,5 +187,55 @@ def get_admin_map():
     return render_template('class_map.html', src=map_files)
 
 
+@app.route('/building/acs/map', methods=['GET', 'POST'])
+def get_acs_map():
+    map_files.clear()
+    map_files.append("maps/acs.svg")
+    return render_template('class_map.html', src=map_files)
+
+
+@app.route('/building/gran/map', methods=['GET', 'POST'])
+def get_gran_map():
+    map_files.clear()
+    map_files.append("maps/gran.svg")
+    return render_template('class_map.html', src=map_files)
+
+
+@app.route('/building/glcr/map', methods=['GET', 'POST'])
+def get_glcr_map():
+    map_files.clear()
+    map_files.append("maps/glcr.svg")
+    return render_template('class_map.html', src=map_files)
+
+
+@app.route('/building/se1/map', methods=['GET', 'POST'])
+def get_se1_map():
+    map_files.clear()
+    map_files.append("maps/s_e1.svg")
+    return render_template('class_map.html', src=map_files)
+
+
+@app.route('/building/se2/map', methods=['GET', 'POST'])
+def get_se2_map():
+    map_files.clear()
+    map_files.append("maps/se2.svg")
+    return render_template('class_map.html', src=map_files)
+
+
+@app.route('/building/ssm/map', methods=['GET', 'POST'])
+def get_ssm_map():
+    map_files.clear()
+    map_files.append("maps/ssm.svg")
+    return render_template('class_map.html', src=map_files)
+
+
+@app.route('/building/kl/map', methods=['GET', 'POST'])
+def get_kl_map():
+    map_files.clear()
+    map_files.append("maps/kl-1.svg")
+    map_files.append("maps/kl-2.svg")
+    return render_template('class_map.html', src=map_files)
+
+
 if __name__ == "__main__":
     app.run()
