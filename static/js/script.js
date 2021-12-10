@@ -13,7 +13,8 @@
      let ssmElement = svgObject.getElementById('ssm_path_1');
      let ssmElement2 = svgObject.getElementById('ssm_path_2');
      let klElement = svgObject.getElementById('kl_path');
-
+     let ssbElement = svgObject.getElementById('ssb_path_1');
+     let sreElement = svgObject.getElementById('sre_path');
     cobElement.onclick = function () {
         jumpToLink('building/cob1/map');
     }
@@ -52,6 +53,12 @@
     }
     klElement.onclick = function () {
         jumpToLink('building/kl/map');
+    }
+    ssbElement.onclick = function () {
+        jumpToLink('building/ssb/map');
+    }
+    sreElement.onclick = function () {
+        jumpToLink('building/sre/map');
     }
 
  })
