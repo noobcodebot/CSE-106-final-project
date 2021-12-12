@@ -1,10 +1,10 @@
-.blue-background{
-    background-color:royalblue;
+.UCMGold-background{
+    background-color:rgb(210,159,25);
 }
 
 .login-buttons{
     width: 100%;
-    background-color: gold;
+    background-color: rgb(210,159,25);
     color: white;
     cursor: pointer;
     text-align: center;
@@ -12,10 +12,11 @@
     padding: 10px 20px;
     border: 5px aliceblue;
     border-radius: 5px;
+    font-family: "Lora", Georgia, "Times New Roman", Times, serif;
 }
 
 .logout-button{
-    background-color: gold;
+    background-color: rgb(210,159,25);;
     color: white;
     cursor: pointer;
     text-align: center;
@@ -23,6 +24,10 @@
     padding: 10px 20px;
     border: 5px aliceblue;
     border-radius: 5px;
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    font-family: "Lora", Georgia, "Times New Roman", Times, serif;
 }
 
 .login-buttons:hover {
@@ -123,4 +128,7 @@ div.display {
     color: white;
     border-radius: 2.5px;
     font-size: 24px;
+}
+label{
+    color: black;
 }
