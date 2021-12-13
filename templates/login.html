@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Log In</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </head>
@@ -19,7 +19,7 @@
         <button type="submit" value="submit" class="login-buttons" > Login </button>
     </form>
     <br><br>
-    <button type="button" onclick="jumpToLink('register')" class="link-button" name="reg_button">Create a new account</button>
+    <button style="color: blue" type="button" onclick="jumpToLink('register')" class="link-button" name="reg_button">Create a new account</button>
 </div>
         <h1 style="color: white" class="center">
     {{error}}
