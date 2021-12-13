@@ -105,7 +105,7 @@ def login():
             return render_template('login.html', error='Please enter valid Username/Password')
         login_user(user)
         student = Students.query.filter_by(user_id=user.id).first()
-        return redirect(url_for('user_page', student_id=student.id))
+        return redirect(url_for('home'))
     return render_template('login.html', error='')
 
 
@@ -113,7 +113,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('home'))
 
 
 @app.route('/user/<student_id>', methods=['GET', 'POST'])

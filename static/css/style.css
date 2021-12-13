@@ -24,9 +24,6 @@
     padding: 10px 20px;
     border: 5px aliceblue;
     border-radius: 5px;
-    position: absolute;
-    top: 40px;
-    left: 40px;
     font-family: "Lora", Georgia, "Times New Roman", Times, serif;
 }
 
@@ -79,6 +76,7 @@ div.display {
 .center {
     text-align: center;
     font-family: serif;
+    color: black;
 }
 
 .link-button {
@@ -130,4 +128,40 @@ div.display {
 }
 label{
     color: black;
+}
+
+.topnav {
+  background-color: rgb(210,159,25);
+}
+
+/* Style the links inside the navigation bar */
+.topnav button {
+    background-color: rgb(64,64,64);
+    width: 20%;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    margin: 0 auto;
+    display: inline;
+    /*border: 3px solid rgb(210, 159, 25);*/
+    border: none;
+}
+.topnav form {
+    margin: 0 auto;
+    display:inline;
+    border:none;
+}
+
+/* Change the color of links on hover */
+.topnav button:hover {
+  background-color: mediumseagreen;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav button.active {
+  background-color: mediumseagreen;
+  color: white;
 }
