@@ -119,6 +119,8 @@ def logout():
 @app.route('/user/<student_id>', methods=['GET', 'POST'])
 @login_required
 def user_page(student_id):
+    if int(student_id) != current_user.id:
+        return redirect(url_for('home'))
     name = Students.query.filter_by(id=student_id).first().first_name
     classes = Enrollment.query.filter_by(student_id=student_id).all()
     student_classes = []
