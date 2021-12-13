@@ -158,7 +158,7 @@ def add_class_to_user():
         student = Students.query.filter(Students.user_id == current_user.id).first()
         if not is_enrolled(class_id, student.id):
             add_class(student.id, class_id)
-            return redirect(url_for('user_page'), student_id=student.id)
+            return render_template('class_registration.html', classes=classes)
         else:
             return render_template('class_registration.html', classes=classes,
                                    error='You are currently enrolled in this class!')
