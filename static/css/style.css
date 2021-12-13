@@ -136,7 +136,7 @@ label{
 
 /* Style the links inside the navigation bar */
 .topnav button {
-    background-color: rgb(64,64,64);
+    background-color: rgb(0,40,86);
     width: 20%;
     color: white;
     text-align: center;
@@ -157,11 +157,11 @@ label{
 /* Change the color of links on hover */
 .topnav button:hover {
   background-color: mediumseagreen;
-  color: black;
+  color: white;
 }
 
 /* Add a color to the active/current link */
 .topnav button.active {
-  background-color: mediumseagreen;
+  background-color: rgb(84,84,86);
   color: white;
 }

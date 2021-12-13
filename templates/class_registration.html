@@ -6,11 +6,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </head>
-<body class="blue-background">
-    <form action="{{url_for('logout')}}" method="post">
-        <button type="submit" class="logout-button">logout</button>
-    </form>
-    <div id="display">
+<body class="UCMGold-background">
+    <div class="topnav">
+        <form action="{{ url_for('logout') }}" method="post">
+            <button type="submit">Logout</button></form>
+        <button type="button" onclick="jumpToLink('/')">Home Page</button>
+        <button type="button" onclick="jumpToLink('user/{{ current_user.id }}')">User</button>
+        <button type="button" class="active" onclick="jumpToLink('class/add_class')">Registration</button>
+    </div>
+    <div id="display" style="background-color: rgb(84,84,86)">
         <table id="tabs">
             {% block content %}
                 {% if classes %}

@@ -11,9 +11,11 @@
     {% block content %}
     {% if current_user.is_authenticated %}
         <form action="{{ url_for('logout') }}" method="post">
-            <button type="submit">Logout</button>
-        </form>
+            <button type="submit">Logout</button></form>
+        <button type="button" class="active" onclick="jumpToLink('/')">Home Page</button>
         <button type="button" onclick="jumpToLink('user/{{ current_user.id }}')">User</button>
+        <button type="button" onclick="jumpToLink('class/add_class')">Registration</button>
+
     {% else %}
         <button type="button" onclick="jumpToLink('login')">Login</button>
     {% endif %}

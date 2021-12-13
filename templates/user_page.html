@@ -6,16 +6,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </head>
-<body class="blue-background">
-<button type="submit" class="link-button-right" onclick="jumpToLink('class/add_class')">add classes</button>
-<form action="{{ url_for('logout') }}" method="post">
-    <button type="submit" class="logout-button">logout</button>
-</form>
-
-<h1 class="center" style="color: black">
-    Hi, {{name}}
-</h1>
-<div class="display">
+<body class="UCMGold-background">
+<div style="background-color: rgb(84,84,86);">
+    <div class="topnav">
+        <form action="{{ url_for('logout') }}" method="post">
+            <button type="submit">Logout</button></form>
+        <button type="button" onclick="jumpToLink('/')">Home Page</button>
+        <button type="button" class="active" onclick="jumpToLink('user/{{ current_user.id }}')">User</button>
+        <button type="button" onclick="jumpToLink('class/add_class')">Registration</button>
+    </div>
+    <h1 class="center" style="color: white">
+        Hi, {{name}}
+    </h1>
+    <div class="display">
     <table id="tabs" align="center">
     {%block content%}
         {% if classes %}
@@ -32,6 +35,7 @@
         {% endif %}
     {% endblock content%}
     </table>
+    </div>
 </div>
 </body>
 </html>
