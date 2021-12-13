@@ -16,7 +16,7 @@
 }
 
 .logout-button{
-    background-color: rgb(210,159,25);;
+    background-color: gold;
     color: white;
     cursor: pointer;
     text-align: center;
@@ -111,7 +111,7 @@ div.display {
     padding-right: 5px;
     text-align: center;
     border: 2px rgba(255,255,255,0.8) solid;
-    background-color: darkgray;
+    background-color: royalblue;
     color: white;
     border-radius: 2.5px;
     font-size: 24px;
@@ -123,9 +123,8 @@ div.display {
     padding-left: 5px;
     padding-right: 5px;
     text-align: center;
-    border: 2px rgba(255,255,255,0.8) solid;
-
-    color: white;
+    border: 2px black solid;
+    background-color: lightgray;
     border-radius: 2.5px;
     font-size: 24px;
 }
