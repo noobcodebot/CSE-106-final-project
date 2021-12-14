@@ -75,7 +75,8 @@ def is_enrolled(class_id, student_id):
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if current_user.is_authenticated:
-        classes = Enrollment.query.all()
+        student = Students.query.filter_by(user_id = current_user.id).first()
+        classes = Enrollment.query.filter_by(student_id = student.id)
         student_classes = []
         for c in classes:
             enrolled = Classes.query.filter_by(id=c.class_id).first()
