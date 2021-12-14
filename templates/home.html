@@ -22,5 +22,72 @@
     {% endblock content %}
 </div>
 <object id="svg-campus" data="{{url_for('static', filename='maps/campus_map_recent.svg')}}" type="image/svg+xml" width="100%" height="100%" ></object>
+{% block content2 %}
+    {% if current_user.is_authenticated %}
+        {% if classes %}
+            {% for i in range(classes|length) %}
+               <script>
+                   window.addEventListener("load", function () {
+                       var svgObject = document.getElementById('svg-campus').contentDocument;
+                       if ('{{ classes[i].building }}' == 'COB1'){
+                        svgObject.getElementById('cob1_path').className.animVal = 'reg';
+                        svgObject.getElementById('cob1_path').className.baseVal = 'reg';
+                       }
+                       else if ('{{ classes[i].building }}' == 'COB2'){
+                        svgObject.getElementById('cob2_path_1').className.animVal = 'reg';
+                        svgObject.getElementById('cob2_path_1').className.baseVal = 'reg';
+                        svgObject.getElementById('cob2_path_2').className.animVal = 'reg';
+                        svgObject.getElementById('cob2_path_2').className.baseVal = 'reg';
+                       }
+                       else if ('{{ classes[i].building }}' == 'ACS'){
+                        svgObject.getElementById('acs_path').className.animVal = 'reg';
+                        svgObject.getElementById('acs_path').className.baseVal = 'reg';
+                       }
+                       else if ('{{ classes[i].building }}' == 'ADMIN'){
+                        svgObject.getElementById('admin_path').className.animVal = 'reg';
+                        svgObject.getElementById('admin_path').className.baseVal = 'reg';
+                       }
+                       else if ('{{ classes[i].building }}' == 'GRAN'){
+                        svgObject.getElementById('gran_path').className.animVal = 'reg';
+                        svgObject.getElementById('gran_path').className.baseVal = 'reg';
+                       }
+                       else if ('{{ classes[i].building }}' == 'GLCR'){
+                        svgObject.getElementById('glcr_path').className.animVal = 'reg';
+                        svgObject.getElementById('glcr_path').className.baseVal = 'reg';
+                       }
+                       else if ('{{ classes[i].building }}' == 'SE'){
+                        svgObject.getElementById('se1_path_1').className.animVal = 'reg';
+                        svgObject.getElementById('se1_path_1').className.baseVal = 'reg';
+                        svgObject.getElementById('se1_path_2').className.animVal = 'reg';
+                        svgObject.getElementById('se1_path_2').className.baseVal = 'reg';
+                       }
+                       else if ('{{ classes[i].building }}' == 'SE2'){
+                        svgObject.getElementById('se2_path').className.animVal = 'reg';
+                        svgObject.getElementById('se2_path').className.baseVal = 'reg';
+                       }
+                       else if ('{{ classes[i].building }}' == 'SSM'){
+                        svgObject.getElementById('ssm_path_1').className.animVal = 'reg';
+                        svgObject.getElementById('ssm_path_1').className.baseVal = 'reg';
+                        svgObject.getElementById('ssm_path_2').className.animVal = 'reg';
+                        svgObject.getElementById('ssm_path_2').className.baseVal = 'reg';
+                       }
+                       else if ('{{ classes[i].building }}' == 'KL'){
+                        svgObject.getElementById('kl_path').className.animVal = 'reg';
+                        svgObject.getElementById('kl_path').className.baseVal = 'reg';
+                       }
+                       else if ('{{ classes[i].building }}' == 'SSB'){
+                        svgObject.getElementById('ssb_path_1').className.animVal = 'reg';
+                        svgObject.getElementById('ssb_path_1').className.baseVal = 'reg';
+                       }
+                       else if ('{{ classes[i].building }}' == 'SRE'){
+                        svgObject.getElementById('sre_path').className.animVal = 'reg';
+                        svgObject.getElementById('sre_path').className.baseVal = 'reg';
+                       }
+                   })
+               </script>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+{% endblock content2 %}
 </body>
 </html>
