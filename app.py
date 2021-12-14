@@ -70,7 +70,7 @@ def is_enrolled(class_id, student_id):
             return True
     return False
 
-
+# Our main page, which renders the full ucm map
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if current_user.is_authenticated:
@@ -83,7 +83,7 @@ def home():
         return render_template('home.html', classes=student_classes)
     return render_template('home.html')
 
-
+# Our registration page for new users to create accounts
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -104,7 +104,7 @@ def register():
             return render_template('register.html', error='Please enter valid credentials!')
     return render_template('register.html')
 
-
+# Login page for people to sign in with accounts
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -119,14 +119,14 @@ def login():
         return redirect(url_for('home'))
     return render_template('login.html', error='')
 
-
+# Logout function
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))
 
-
+# user page where users can see classes currently register and links to building maps for their rooms
 @app.route('/user/<student_id>', methods=['GET', 'POST'])
 @login_required
 def user_page(student_id):
@@ -140,7 +140,7 @@ def user_page(student_id):
         student_classes.append(enrolled)
     return render_template('user_page.html', name=name, classes=student_classes)
 
-
+# classes function that chooses which class to load for map rendering
 @app.route('/classes/', methods=['GET', 'POST'])
 @login_required
 def load_class():
@@ -148,7 +148,7 @@ def load_class():
     class_to_load = Classes.query.filter_by(class_name=class_name).first()
     return redirect(url_for("class_map", id=class_to_load.id))
 
-
+# takes the passed class and renders the appropiate map for the building that houses it
 @app.route('/class/<id>/map', methods=['GET', 'POST'])
 @login_required
 def class_map(id):
@@ -174,7 +174,7 @@ def class_map(id):
         map_files.append(maps)
         return render_template('class_map.html', src=map_files, room=room_no, id=id)
 
-
+# add class function
 @app.route('/class/add_class', methods=['GET', 'POST'])
 @login_required
 def add_class_to_user():
@@ -191,7 +191,7 @@ def add_class_to_user():
                                    error='You are currently enrolled in this class!')
     return render_template('class_registration.html', classes=classes)
 
-
+# drop class function
 @app.route('/class/drop_class', methods=['GET', 'POST'])
 @login_required
 def drop_class_from_user():
@@ -206,6 +206,7 @@ def drop_class_from_user():
                                    error='You are not enrolled in this class!')
     return render_template('class_registration.html', classes=classes)
 
+# all our links to building maps, which load the appropiate svg's
 
 @app.route('/building/cob1/map', methods=['GET', 'POST'])
 def get_cob_map():
