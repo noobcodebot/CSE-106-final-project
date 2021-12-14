@@ -78,7 +78,6 @@ def home():
         classes = Enrollment.query.all()
         student_classes = []
         for c in classes:
-            print('bitch')
             enrolled = Classes.query.filter_by(id=c.class_id).first()
             student_classes.append(enrolled)
         return render_template('home.html', classes=student_classes)
