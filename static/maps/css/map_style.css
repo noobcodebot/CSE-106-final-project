@@ -19,3 +19,8 @@
     fill-opacity:1;
     cursor: pointer;
 }
+
+.reg:hover {
+    fill: palevioletred;
+    opacity: 1;
+}
