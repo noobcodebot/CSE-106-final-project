@@ -137,7 +137,7 @@ def user_page(student_id):
     student_classes = []
     for c in classes:
         enrolled = Classes.query.filter_by(id=c.class_id).first()
-        student_classes.append(enrolled.class_name)
+        student_classes.append(enrolled)
     return render_template('user_page.html', name=name, classes=student_classes)
 
 
@@ -195,7 +195,7 @@ def add_class_to_user():
 @login_required
 def drop_class_from_user():
     if request.method == 'POST':
-        class_id = int(request.form['reg_button_2'])
+        class_id = int(request.form['drop_button'])
         student = Students.query.filter(Students.user_id == current_user.id).first()
         if is_enrolled(class_id, student.id):
             drop_class(student.id, class_id)

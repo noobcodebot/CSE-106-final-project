@@ -23,14 +23,23 @@
     {%block content%}
         {% if classes %}
             <th>Course Name</th>
+            <th>Drop</th>
             {% for i in range(classes|length) %}
                 <tr>
                     <td>
                         <form action="{{url_for('load_class')}}" method="post">
-                            <input type="submit" class="link-button" type="submit" value="{{classes[i]}}" name="class">
+                            <input type="submit" class="link-button" type="submit" value="{{classes[i].class_name}}" name="class">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{url_for('drop_class_from_user')}}" method = 'POST'>
+                            <button type="submit" name="drop_button" value="{{classes[i].id}}" class="reg-button">
+                                Drop
+                            </button>
                         </form>
                     </td>
                 </tr>
+
             {% endfor %}
         {% else %}
             <h1 class="center" style="color: white">You Are Not Registered For Any Classes</h1>
