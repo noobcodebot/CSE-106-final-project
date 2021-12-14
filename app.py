@@ -148,23 +148,24 @@ def class_map(id):
     map_files.clear()
     c = Classes.query.filter_by(id=id).first()
     building = c.building
+    room_no = c.room_no
     if building == 'COB1' or building == 'COB2' or building == 'KL':
-        room_no = c.room_no[0]
+        file_suffix = c.room_no[0]
         if building == 'KL':
-            maps = "maps/" + building.lower() + "-" + room_no + ".svg"
+            maps = "maps/" + building.lower() + "-" + file_suffix + ".svg"
             map_files.append(maps)
-            return render_template('class_map.html', src=map_files)
-        maps = "maps/"+building+"-"+room_no+".svg"
+            return render_template('class_map.html', src=map_files, room=room_no, id=id)
+        maps = "maps/"+building+"-"+file_suffix+".svg"
         map_files.append(maps)
-        return render_template('class_map.html', src=map_files)
+        return render_template('class_map.html', src=map_files, room=room_no, id=id)
     else:
         if building == 'SE':
             maps = "maps/s_e1.svg"
             map_files.append(maps)
-            return render_template('class_map.html', src=map_files)
+            return render_template('class_map.html', src=map_files, room=room_no, id=id)
         maps = "maps/"+building.lower()+".svg"
         map_files.append(maps)
-        return render_template('class_map.html', src=map_files)
+        return render_template('class_map.html', src=map_files, room=room_no, id=id)
 
 
 @app.route('/class/add_class', methods=['GET', 'POST'])
