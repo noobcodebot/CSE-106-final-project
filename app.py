@@ -12,7 +12,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
 engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"], echo=True)
 
 map_files = []
-classes= Classes.query.all()
 
 db.create_all()
 db.session.commit()
@@ -179,6 +178,7 @@ def class_map(id):
 @app.route('/class/add_class', methods=['GET', 'POST'])
 @login_required
 def add_class_to_user():
+    classes = Classes.query.all()
     if request.method == 'POST':
         class_id = int(request.form['reg_button'])
         student = Students.query.filter(Students.user_id == current_user.id).first()
