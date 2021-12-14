@@ -139,71 +139,32 @@ def user_page(student_id):
 def load_class():
     class_name = request.form['class']
     class_to_load = Classes.query.filter_by(class_name=class_name).first()
-    return render_template('classes.html', id=class_to_load.id)
+    return redirect(url_for("class_map", id=class_to_load.id))
 
 
-@app.route('/class/1/map', methods=['GET', 'POST'])
+@app.route('/class/<id>/map', methods=['GET', 'POST'])
 @login_required
-def class_1_map():
+def class_map(id):
     map_files.clear()
-    map_files.append("maps/COB1-1.svg")
-    return render_template('class_map.html', src=map_files)
-
-
-@app.route('/class/2/map', methods=['GET', 'POST'])
-@login_required
-def class_2_map():
-    map_files.clear()
-    map_files.append("maps/s_e1.svg")
-    return render_template('class_map.html', src=map_files)
-
-
-@app.route('/class/3/map', methods=['GET', 'POST'])
-@login_required
-def class_3_map():
-    map_files.clear()
-    map_files.append("maps/ssb.svg")
-    return render_template('class_map.html', src=map_files)
-
-
-@app.route('/class/4/map', methods=['GET', 'POST'])
-@login_required
-def class_4_map():
-    map_files.clear()
-    map_files.append("maps/s_e1.svg")
-    return render_template('class_map.html', src=map_files)
-
-
-@app.route('/class/5/map', methods=['GET', 'POST'])
-@login_required
-def class_5_map():
-    map_files.clear()
-    map_files.append("maps/COB2-1.svg")
-    return render_template('class_map.html', src=map_files)
-
-
-@app.route('/class/6/map', methods=['GET', 'POST'])
-@login_required
-def class_6_map():
-    map_files.clear()
-    map_files.append("maps/sre.svg")
-    return render_template('class_map.html', src=map_files)
-
-
-@app.route('/class/7/map', methods=['GET', 'POST'])
-@login_required
-def class_7_map():
-    map_files.clear()
-    map_files.append("maps/acs.svg")
-    return render_template('class_map.html', src=map_files)
-
-
-@app.route('/class/8/map', methods=['GET', 'POST'])
-@login_required
-def class_8_map():
-    map_files.clear()
-    map_files.append("maps/glcr.svg")
-    return render_template('class_map.html', src=map_files)
+    c = Classes.query.filter_by(id=id).first()
+    building = c.building
+    if building == 'COB1' or building == 'COB2' or building == 'KL':
+        room_no = c.room_no[0]
+        if building == 'KL':
+            maps = "maps/" + building.lower() + "-" + room_no + ".svg"
+            map_files.append(maps)
+            return render_template('class_map.html', src=map_files)
+        maps = "maps/"+building+"-"+room_no+".svg"
+        map_files.append(maps)
+        return render_template('class_map.html', src=map_files)
+    else:
+        if building == 'SE':
+            maps = "maps/s_e1.svg"
+            map_files.append(maps)
+            return render_template('class_map.html', src=map_files)
+        maps = "maps/"+building.lower()+".svg"
+        map_files.append(maps)
+        return render_template('class_map.html', src=map_files)
 
 
 @app.route('/class/add_class', methods=['GET', 'POST'])
@@ -215,6 +176,7 @@ def add_class_to_user():
         if not is_enrolled(class_id, student.id):
             add_class(student.id, class_id)
             return redirect(url_for('user_page', student_id=student.id))
+
         else:
             return render_template('class_registration.html', classes=classes,
                                    error='You are currently enrolled in this class!')
