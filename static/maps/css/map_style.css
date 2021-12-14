@@ -10,3 +10,8 @@
     fill: palegoldenrod;
     opacity: 1;
 }
+
+.series:active{
+    fill: darkred;
+    opacity: 1;
+}
