@@ -54,15 +54,19 @@ def add_student(fname, lname, user_id):
 
 
 def add_class(student_id, class_id):
-    class_to_add = Classes.query.filter(Classes.id == class_id).first()
     db.session.add(Enrollment(student_id=student_id, class_id=class_id))
+    db.session.commit()
+
+
+def drop_class(student_id, class_id):
+    Enrollment.query.filter(Enrollment.class_id == class_id, Enrollment.student_id == student_id).delete()
     db.session.commit()
 
 
 def is_enrolled(class_id, student_id):
     student = Students.query.filter_by(id=student_id).first()
-    classes = student.classes
-    for entry in classes:
+    user_classes = student.classes
+    for entry in user_classes:
         if entry.id == class_id:
             return True
     return False
@@ -140,28 +144,95 @@ def load_class():
 
 @app.route('/class/1/map', methods=['GET', 'POST'])
 @login_required
-def class_map():
+def class_1_map():
     map_files.clear()
     map_files.append("maps/COB1-1.svg")
-    map_files.append("maps/COB1-2.svg")
+    return render_template('class_map.html', src=map_files)
+
+
+@app.route('/class/2/map', methods=['GET', 'POST'])
+@login_required
+def class_2_map():
+    map_files.clear()
+    map_files.append("maps/s_e1.svg")
+    return render_template('class_map.html', src=map_files)
+
+
+@app.route('/class/3/map', methods=['GET', 'POST'])
+@login_required
+def class_3_map():
+    map_files.clear()
+    map_files.append("maps/ssb.svg")
+    return render_template('class_map.html', src=map_files)
+
+
+@app.route('/class/4/map', methods=['GET', 'POST'])
+@login_required
+def class_4_map():
+    map_files.clear()
+    map_files.append("maps/s_e1.svg")
+    return render_template('class_map.html', src=map_files)
+
+
+@app.route('/class/5/map', methods=['GET', 'POST'])
+@login_required
+def class_5_map():
+    map_files.clear()
+    map_files.append("maps/COB2-1.svg")
+    return render_template('class_map.html', src=map_files)
+
+
+@app.route('/class/6/map', methods=['GET', 'POST'])
+@login_required
+def class_6_map():
+    map_files.clear()
+    map_files.append("maps/sre.svg")
+    return render_template('class_map.html', src=map_files)
+
+
+@app.route('/class/7/map', methods=['GET', 'POST'])
+@login_required
+def class_7_map():
+    map_files.clear()
+    map_files.append("maps/acs.svg")
+    return render_template('class_map.html', src=map_files)
+
+
+@app.route('/class/8/map', methods=['GET', 'POST'])
+@login_required
+def class_8_map():
+    map_files.clear()
+    map_files.append("maps/glcr.svg")
     return render_template('class_map.html', src=map_files)
 
 
 @app.route('/class/add_class', methods=['GET', 'POST'])
 @login_required
 def add_class_to_user():
-    user = Users.query.filter_by(id=current_user.id).first()
-    student = Students.query.filter(Students.user_id == user.id).first()
-
     if request.method == 'POST':
         class_id = int(request.form['reg_button'])
         student = Students.query.filter(Students.user_id == current_user.id).first()
         if not is_enrolled(class_id, student.id):
             add_class(student.id, class_id)
-            return render_template('class_registration.html', classes=classes)
+            return redirect(url_for('user_page', student_id=student.id))
         else:
             return render_template('class_registration.html', classes=classes,
                                    error='You are currently enrolled in this class!')
+    return render_template('class_registration.html', classes=classes)
+
+
+@app.route('/class/drop_class', methods=['GET', 'POST'])
+@login_required
+def drop_class_from_user():
+    if request.method == 'POST':
+        class_id = int(request.form['reg_button_2'])
+        student = Students.query.filter(Students.user_id == current_user.id).first()
+        if is_enrolled(class_id, student.id):
+            drop_class(student.id, class_id)
+            return redirect(url_for('user_page',  student_id=student.id))
+        else:
+            return render_template('class_registration.html', classes=classes,
+                                   error='You are not enrolled in this class!')
     return render_template('class_registration.html', classes=classes)
 
 
