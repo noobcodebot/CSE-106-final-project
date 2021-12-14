@@ -15,6 +15,13 @@
      let klElement = svgObject.getElementById('kl_path');
      let ssbElement = svgObject.getElementById('ssb_path_1');
      let sreElement = svgObject.getElementById('sre_path');
+
+     //for all the classes passed by user
+     console.log(svgObject.getElementById('kl_path').className.animVal);
+     svgObject.getElementById('kl_path').className.animVal = 'reg';
+     svgObject.getElementById('kl_path').className.baseVal = 'reg';
+
+     //end for
     cobElement.onclick = function () {
         jumpToLink('building/cob1/map');
     }

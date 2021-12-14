@@ -10,8 +10,12 @@
     fill: palegoldenrod;
     opacity: 1;
 }
-
 .series:active{
     fill: darkred;
     opacity: 1;
+}
+.reg{
+    fill: darkred;
+    fill-opacity:1;
+    cursor: pointer;
 }
