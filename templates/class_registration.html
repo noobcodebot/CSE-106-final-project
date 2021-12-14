@@ -33,6 +33,13 @@
                                     </button>
                                 </form>
                             </td>
+                            <td>
+                                <form action="{{url_for('drop_class_from_user')}}" method = 'POST'>
+                                    <button type="submit" name="reg_button_2" value="{{class.id}}" class="reg-button">
+                                        Drop
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                         {% endfor %}
                     {% if error %}
