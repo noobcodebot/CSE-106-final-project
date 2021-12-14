@@ -1,0 +1,11 @@
+SQLAlchemy
+setuptools
+pip
+MarkupSafe
+Jinja2
+itsdangerous
+Flask
+Flask-SQLAlchemy
+Flask-Login
+Flask-Admin
+click
