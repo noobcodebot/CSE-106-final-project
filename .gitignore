@@ -12,3 +12,4 @@ static/maps/campus_map_recent.pdf
 static/maps/COB1-part-1.pdf
 .DS_Store
 .DS_Store
+__pycache__/models.cpython-310.pyc
